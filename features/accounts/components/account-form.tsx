@@ -1,8 +1,7 @@
 import { z } from "zod";
-import { insertAccountSchema } from "@/db/schema";
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
   Form,
   FormItem,
@@ -11,9 +10,10 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
+
+import { TrashIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { TrashIcon } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "O nome é obrigatório" }).trim(),
