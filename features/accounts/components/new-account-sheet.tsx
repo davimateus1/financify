@@ -20,8 +20,8 @@ const formSchema = insertAccountSchema.pick({
 type FormValues = z.infer<typeof formSchema>;
 
 export const NewAccountSheet = () => {
-  const { mutate, isPending } = useCreateAccount();
   const { isOpen, onClose } = useNewAccount();
+  const { mutate, isPending } = useCreateAccount();
 
   const onSubmit = (values: FormValues) => {
     mutate(values, {

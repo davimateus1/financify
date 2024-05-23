@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { TrashIcon } from "lucide-react";
+import { useConfirm } from "@/hooks/use-confirm";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -43,8 +44,14 @@ export function DataTable<TData, TValue>({
   disabled,
   filterKey,
 }: DataTableProps<TData, TValue>) {
+  const [ConfirmDialog, confirm] = useConfirm({
+    title: "Você tem certeza?",
+    message: "Essa ação não pode ser desfeita.",
+  });
+
   const [rowSelection, setRowSelection] = React.useState({});
   const [sorting, setSorting] = React.useState<SortingState>([]);
+
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
@@ -64,8 +71,18 @@ export function DataTable<TData, TValue>({
 
   const selectedRowsLength = table.getFilteredSelectedRowModel().rows.length;
 
+  const handleConfirmDelete = async () => {
+    const ok = await confirm();
+
+    if (ok) {
+      onDelete(table.getFilteredSelectedRowModel().rows);
+      table.resetRowSelection();
+    }
+  };
+
   return (
     <div>
+      <ConfirmDialog />
       <div className="flex items-center py-4">
         <Input
           placeholder={`Filtrar por ${filterKey}...`}
@@ -80,6 +97,7 @@ export function DataTable<TData, TValue>({
             size="sm"
             variant="outline"
             disabled={disabled}
+            onClick={handleConfirmDelete}
             className="ml-auto font-normal text-xs"
           >
             <TrashIcon className="size-4 mr-2" />
