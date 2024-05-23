@@ -49,8 +49,6 @@ export const AccountForm = ({
     onDelete?.();
   };
 
-  console.log("AccountForm", form.formState.errors);
-
   return (
     <Form {...form}>
       <form
