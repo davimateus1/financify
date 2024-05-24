@@ -8,14 +8,14 @@ import { columns } from "./columns";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { useGetAccounts } from "@/features/accounts/api/use-get-accounts";
-import { useNewAccount } from "@/features/accounts/hooks/use-new-account";
-import { useBulkDeleteAccounts } from "@/features/accounts/api/use-bulk-delete-accounts";
+import { useGetCategories } from "@/features/categories/api/use-get-categories";
+import { useNewCategory } from "@/features/categories/hooks/use-new-category";
+import { useBulkDeleteCategories } from "@/features/categories/api/use-bulk-delete-categories";
 
-const AccountsPage = () => {
-  const newAccount = useNewAccount();
-  const { data, isLoading } = useGetAccounts();
-  const { mutate, isPending } = useBulkDeleteAccounts();
+const CategoriesPage = () => {
+  const newCategory = useNewCategory();
+  const { data, isLoading } = useGetCategories();
+  const { mutate, isPending } = useBulkDeleteCategories();
 
   const isDisabled = isPending || isLoading;
 
@@ -41,9 +41,9 @@ const AccountsPage = () => {
       <Card className="border-none drop-shadow-sm">
         <CardHeader className="gap-y-2 lg:flex-row lg:items-center lg:justify-between">
           <CardTitle className="text-xl line-clamp-1">
-            Página de contas
+            Página de Categorias
           </CardTitle>
-          <Button size="sm" onClick={newAccount.onOpen}>
+          <Button size="sm" onClick={newCategory.onOpen}>
             <Plus className="size-4 mr-2" />
             Adicionar
           </Button>
@@ -65,4 +65,4 @@ const AccountsPage = () => {
   );
 };
 
-export default AccountsPage;
+export default CategoriesPage;
