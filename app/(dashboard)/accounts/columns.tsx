@@ -5,7 +5,9 @@ import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { client } from "@/lib/hono";
+import { Actions } from "./actions";
 import { ColumnDef } from "@tanstack/react-table";
+
 import { Checkbox } from "@/components/ui/checkbox";
 
 export type ResponseType = InferResponseType<
@@ -47,5 +49,10 @@ export const columns: ColumnDef<ResponseType>[] = [
         </Button>
       );
     },
+  },
+  {
+    id: "actions",
+    accessorKey: "Ações",
+    cell: ({ row }) => <Actions id={row.original.id} />,
   },
 ];
