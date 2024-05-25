@@ -8,14 +8,14 @@ import { columns } from "./columns";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { useGetAccounts } from "@/features/accounts/api/use-get-accounts";
+import { useGetTransactions } from "@/features/transactions/api/use-get-transactions";
 import { useNewTransaction } from "@/features/transactions/hooks/use-new-transaction";
-import { useBulkDeleteAccounts } from "@/features/accounts/api/use-bulk-delete-accounts";
+import { useBulkDeleteTransactions } from "@/features/transactions/api/use-bulk-delete-transactions";
 
 const TransactionsPage = () => {
   const newTransaction = useNewTransaction();
-  const { data, isLoading } = useGetAccounts();
-  const { mutate, isPending } = useBulkDeleteAccounts();
+  const { data, isLoading } = useGetTransactions();
+  const { mutate, isPending } = useBulkDeleteTransactions();
 
   const isDisabled = isPending || isLoading;
 
@@ -50,7 +50,7 @@ const TransactionsPage = () => {
         </CardHeader>
         <CardContent>
           <DataTable
-            filterKey="name"
+            filterKey="payee"
             data={data || []}
             columns={columns}
             disabled={isDisabled}

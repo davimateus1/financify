@@ -263,6 +263,7 @@ const app = new Hono()
       );
 
       const [data] = await db
+        .with(transactionsToDelete)
         .delete(transactions)
         .where(
           inArray(

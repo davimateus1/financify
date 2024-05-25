@@ -11,16 +11,16 @@ import {
   DropdownMenuContent,
 } from "@/components/ui/dropdown-menu";
 
-import { useOpenAccount } from "@/features/accounts/hooks/use-open-account";
-import { useDeleteAccount } from "@/features/accounts/api/use-delete-account";
+import { useOpenTransaction } from "@/features/transactions/hooks/use-open-transaction";
+import { useDeleteTransaction } from "@/features/transactions/api/use-delete-transaction";
 
 type ActionsProps = {
   id: string;
 };
 
 export const Actions = ({ id }: ActionsProps) => {
-  const { onOpen, onClose } = useOpenAccount();
-  const { mutate, isPending } = useDeleteAccount(id);
+  const { onOpen, onClose } = useOpenTransaction();
+  const { mutate, isPending } = useDeleteTransaction(id);
 
   const [ConfirmDialog, confirm] = useConfirm({
     title: "Você tem certeza?",
