@@ -24,7 +24,7 @@ const SignUpPage = () => {
         </div>
       </div>
       <div className="h-full bg-blue-700 hidden lg:flex items-center justify-center">
-        <Image src="/logo.svg" alt="financify-logo" width={100} height={100} />
+        <Image src="/logo.svg" alt="financify-logo" width={250} height={250} />
       </div>
     </div>
   );
