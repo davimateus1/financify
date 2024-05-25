@@ -22,7 +22,7 @@ const formSchema = insertAccountSchema.pick({ name: true });
 
 type FormValues = z.infer<typeof formSchema>;
 
-export const EditAccountSheet = () => {
+export const EditTransactionSheet = () => {
   const { isOpen, onClose, id } = useOpenAccount();
 
   const [ConfirmDialog, confirm] = useConfirm({
