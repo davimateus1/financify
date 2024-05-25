@@ -51,7 +51,9 @@ export const NewTransactionSheet = () => {
   }));
 
   const onSubmit = (values: FormValues) => {
-    transactionMutate(values);
+    transactionMutate(values, {
+      onSuccess: () => onClose(),
+    });
   };
 
   const isPending = pendingTransaction || pendingAccount || pendingCategory;
