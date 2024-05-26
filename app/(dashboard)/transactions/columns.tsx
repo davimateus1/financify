@@ -1,8 +1,8 @@
 "use client";
 
 import { InferResponseType } from "hono";
-import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ArrowUpDown, InfoIcon } from "lucide-react";
 
 import { client } from "@/lib/hono";
 import { Actions } from "./actions";
@@ -10,11 +10,18 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { formatCurrency } from "@/lib/utils";
+import { cn, formatCurrency } from "@/lib/utils";
 
 import { Badge } from "@/components/ui/badge";
 import { AccountColumn } from "./account-column";
 import { CategoryColumn } from "./category-column";
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -144,6 +151,44 @@ export const columns: ColumnDef<ResponseType>[] = [
     cell: ({ row }) => {
       const { account, accountId } = row.original;
       return <AccountColumn account={account} accountId={accountId} />;
+    },
+  },
+  {
+    accessorKey: "notes",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Notas
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const notes = String(row.getValue("notes") || "Sem notas");
+      const amount = parseFloat(row.getValue("amount"));
+
+      const isIncome = amount > 0;
+      const isExpense = amount < 0;
+
+      return (
+        <TooltipProvider>
+          <Tooltip delayDuration={100}>
+            <TooltipTrigger className="flex justify-center w-full">
+              <InfoIcon
+                className={cn(
+                  "size-6",
+                  isIncome && "text-blue-500",
+                  isExpense && "text-rose-500"
+                )}
+              />
+            </TooltipTrigger>
+            <TooltipContent>{notes}</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      );
     },
   },
   {
