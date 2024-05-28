@@ -1,36 +1,29 @@
 import { useState } from "react";
-import {
-  AreaChart,
-  BarChart,
-  FileSearch,
-  LineChart,
-  Loader2,
-} from "lucide-react";
+import { Target, Radar, FileSearch, PieChart, Loader2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import {
   Select,
-  SelectContent,
   SelectItem,
-  SelectTrigger,
   SelectValue,
+  SelectTrigger,
+  SelectContent,
 } from "@/components/ui/select";
-import { BarVariant } from "@/components/bar-variant";
 
-import { LineVariant } from "@/components/line-variant";
-import { AreaVariant } from "@/components/area-variant";
-import { Skeleton } from "./ui/skeleton";
+import { RadarVariant } from "./radar-vatiant";
+import { Skeleton } from "@/components/ui/skeleton";
+import { PieVariant } from "@/components/pie-variant";
+import { RadialVariant } from "@/components/radial-variant";
 
-export type ChartProps = {
+export type SpendingPieProps = {
   data?: {
-    date: string;
-    income: number;
-    expenses: number;
+    name: string;
+    value: number;
   }[];
 };
 
-export const Chart = ({ data = [] }: ChartProps) => {
-  const [chartType, setChartType] = useState("area");
+export const SpendingPie = ({ data = [] }: SpendingPieProps) => {
+  const [chartType, setChartType] = useState("pie");
 
   const handleTypeChange = (type: string) => {
     setChartType(type);
@@ -39,28 +32,28 @@ export const Chart = ({ data = [] }: ChartProps) => {
   return (
     <Card className="border-none drop-shadow-md">
       <CardHeader className="flex space-y-2 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">
-        <CardTitle>Transações</CardTitle>
+        <CardTitle>Categorias</CardTitle>
         <Select defaultValue={chartType} onValueChange={handleTypeChange}>
           <SelectTrigger className="lg:w-auto h-9 rounded-md px-3">
             <SelectValue placeholder="Tipo do gráfico" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="area">
+            <SelectItem value="pie">
               <div className="flex items-center">
-                <AreaChart className="size-4 mr-2 shrink-0" />
-                <p className="line-clamp-1">Gráfico de área</p>
+                <PieChart className="size-4 mr-2 shrink-0" />
+                <p className="line-clamp-1">Gráfico de pizza</p>
               </div>
             </SelectItem>
-            <SelectItem value="line">
+            <SelectItem value="radar">
               <div className="flex items-center">
-                <LineChart className="size-4 mr-2 shrink-0" />
-                <p className="line-clamp-1">Gráfico de linhas</p>
+                <Radar className="size-4 mr-2 shrink-0" />
+                <p className="line-clamp-1">Gráfico de radar</p>
               </div>
             </SelectItem>
-            <SelectItem value="bar">
+            <SelectItem value="radial">
               <div className="flex items-center">
-                <BarChart className="size-4 mr-2 shrink-0" />
-                <p className="line-clamp-1">Gráfico de barras</p>
+                <Target className="size-4 mr-2 shrink-0" />
+                <p className="line-clamp-1">Gráfico de radar</p>
               </div>
             </SelectItem>
           </SelectContent>
@@ -76,9 +69,9 @@ export const Chart = ({ data = [] }: ChartProps) => {
           </div>
         ) : (
           <>
-            {chartType === "line" && <LineVariant data={data} />}
-            {chartType === "area" && <AreaVariant data={data} />}
-            {chartType === "bar" && <BarVariant data={data} />}
+            {chartType === "pie" && <PieVariant data={data} />}
+            {chartType === "radar" && <RadarVariant data={data} />}
+            {chartType === "radial" && <RadialVariant data={data} />}
           </>
         )}
       </CardContent>
@@ -86,7 +79,7 @@ export const Chart = ({ data = [] }: ChartProps) => {
   );
 };
 
-export const ChartLoading = () => {
+export const SpendingPieLoading = () => {
   return (
     <Card className="border-none drop-shadow-sm">
       <CardHeader className="flex space-y-2 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">

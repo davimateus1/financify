@@ -5,16 +5,11 @@ import { formatCurrency } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 
 export type CustomTooltipProps = {
-  active?: boolean;
   payload?: any;
-  label?: string;
+  active?: boolean;
 };
 
-export const CustomTooltip = ({
-  active,
-  payload,
-  label,
-}: CustomTooltipProps) => {
+export const CustomTooltip = ({ active, payload }: CustomTooltipProps) => {
   if (!active) return null;
 
   const income = payload[0].value;
