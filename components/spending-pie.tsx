@@ -53,7 +53,7 @@ export const SpendingPie = ({ data = [] }: SpendingPieProps) => {
             <SelectItem value="radial">
               <div className="flex items-center">
                 <Target className="size-4 mr-2 shrink-0" />
-                <p className="line-clamp-1">Gráfico de radar</p>
+                <p className="line-clamp-1">Gráfico radial</p>
               </div>
             </SelectItem>
           </SelectContent>

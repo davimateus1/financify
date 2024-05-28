@@ -11,7 +11,8 @@ const SignInPage = () => {
             Bem vindo de volta!
           </h1>
           <p className="text-base text-[#7E8CA0]">
-            Faça o login ou crie uma conta para acessar o dashboard!
+            Faça o login ou crie uma conta para começar a usar o Financify e
+            gerenciar suas finanças!
           </p>
         </div>
         <div className="flex items-center justify-center mt-8">
