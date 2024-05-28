@@ -4,9 +4,17 @@ import { ClerkLoaded, ClerkLoading, SignUp } from "@clerk/nextjs";
 
 const SignUpPage = () => {
   return (
-    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
+    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2 p-4 lg:p-0">
       <div className="h-full lg:flex flex-col items-center justify-center px-4">
-        <div className="text-center space-y-4 pt-16">
+        <div className="text-center space-y-4">
+          <div className="flex items-center justify-center lg:hidden">
+            <Image
+              src="/logo.svg"
+              alt="financify-logo"
+              width={150}
+              height={150}
+            />
+          </div>
           <h1 className="font-bold text-3xl text-[#2E2A47]">Bem vindo(a)!</h1>
           <p className="text-base text-[#7E8CA0]">
             Cadastre-se para começar a usar o Financify e gerenciar suas
