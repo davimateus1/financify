@@ -1,5 +1,7 @@
 import { Toaster } from "sonner";
 import type { Metadata } from "next";
+
+import { ptBR } from "@clerk/localizations";
 import { ClerkProvider } from "@clerk/nextjs";
 
 import "./globals.css";
@@ -21,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider localization={ptBR}>
       <html lang="pt-BR">
         <body className={inter.className}>
           <QueryProvider>
