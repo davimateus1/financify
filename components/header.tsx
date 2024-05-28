@@ -3,6 +3,8 @@ import { UserButton, ClerkLoading, ClerkLoaded } from "@clerk/nextjs";
 
 import { Navigation } from "@/components/navigation";
 import { HeaderLogo } from "@/components/header-logo";
+
+import { Filters } from "@/components/filters";
 import { WelcomeMessage } from "@/components/welcome-message";
 
 export const Header = () => {
@@ -22,6 +24,7 @@ export const Header = () => {
           </ClerkLoading>
         </div>
         <WelcomeMessage />
+        <Filters />
       </div>
     </header>
   );
