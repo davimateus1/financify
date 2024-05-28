@@ -14,7 +14,21 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Financify",
-  description: "A melhor forma de gerir suas finanças",
+  description:
+    "A melhor forma de gerir suas finanças, de forma simples e fácil!",
+  applicationName: "Financify",
+  creator: "Davi Mateus",
+  keywords: [
+    "finanças",
+    "gerenciamento",
+    "controle",
+    "financeiro",
+    "financify",
+    "finanças pessoais",
+    "finanças empresariais",
+    "finanças familiares",
+    "finanças de negócios",
+  ],
 };
 
 export default function RootLayout({
