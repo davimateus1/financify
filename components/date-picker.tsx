@@ -41,10 +41,10 @@ export const DatePicker = ({ value, onChange, disabled }: DatePickerProps) => {
       </PopoverTrigger>
       <PopoverContent>
         <Calendar
-          initialFocus
           mode="single"
           selected={value}
           onSelect={onChange}
+          style={{ pointerEvents: "auto" }}
         />
       </PopoverContent>
     </Popover>
