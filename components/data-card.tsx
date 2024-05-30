@@ -1,5 +1,5 @@
-import { cn, formatCurrency, formatPercentage } from "@/lib/utils";
 import { VariantProps, cva } from "class-variance-authority";
+import { cn, formatCurrency, formatPercentage } from "@/lib/utils";
 
 import {
   Card,
@@ -8,8 +8,10 @@ import {
   CardContent,
   CardDescription,
 } from "./ui/card";
-import { CountUp } from "./count-up";
-import { Skeleton } from "./ui/skeleton";
+
+import { CountUp } from "@/components/count-up";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useHideInfos } from "@/hooks/use-hide-infos";
 
 const boxVariants = cva("shrink-0 rounded-md p-3", {
   variants: {
@@ -20,9 +22,7 @@ const boxVariants = cva("shrink-0 rounded-md p-3", {
       warning: "bg-yellow-500/20",
     },
   },
-  defaultVariants: {
-    variant: "default",
-  },
+  defaultVariants: { variant: "default" },
 });
 
 const iconVariant = cva("size-6", {
@@ -34,9 +34,7 @@ const iconVariant = cva("size-6", {
       warning: "fill-yellow-500",
     },
   },
-  defaultVariants: {
-    variant: "default",
-  },
+  defaultVariants: { variant: "default" },
 });
 
 type BoxVariants = VariantProps<typeof boxVariants>;
@@ -58,12 +56,14 @@ export const DataCard = ({
   icon: Icon,
   percentageChange = 0,
 }: DataCardProps) => {
+  const { hideInfos } = useHideInfos();
+
   return (
     <Card className="border-none drop-shadow-sm">
       <CardHeader className="flex flex-row items-center justify-between gap-x-4">
         <div className="space-y-2">
           <CardTitle className="text-2xl line-clamp-1">{title}</CardTitle>
-          <CardDescription className="line-clamp-1">
+          <CardDescription className="line-clamp-1 capitalize">
             {dateRange}
           </CardDescription>
         </div>
@@ -72,25 +72,33 @@ export const DataCard = ({
         </div>
       </CardHeader>
       <CardContent>
-        <h1 className="font-bold text-2xl mb-2 line-clamp-1 break-all">
-          <CountUp
-            start={0}
-            end={value}
-            decimals={2}
-            preserveValue
-            decimalPlaces={2}
-            formattingFn={formatCurrency}
-          />
-        </h1>
-        <p
-          className={cn(
-            "text-muted-foreground text-sm line-clamp-1",
-            percentageChange > 0 ? "text-emerald-500" : "text-rose-500"
-          )}
-        >
-          {formatPercentage(percentageChange, { addPrefix: true })} do mês
-          anterior
-        </p>
+        {hideInfos ? (
+          <Skeleton className="shrink-0 w-24 h-8 mb-2" />
+        ) : (
+          <h1 className="font-bold text-2xl mb-2 line-clamp-1 break-all">
+            <CountUp
+              start={0}
+              end={value}
+              decimals={2}
+              preserveValue
+              decimalPlaces={2}
+              formattingFn={formatCurrency}
+            />
+          </h1>
+        )}
+        {hideInfos ? (
+          <Skeleton className="shrink-0 w-40 h-4" />
+        ) : (
+          <p
+            className={cn(
+              "text-muted-foreground text-sm line-clamp-1",
+              percentageChange > 0 ? "text-emerald-500" : "text-rose-500"
+            )}
+          >
+            {formatPercentage(percentageChange, { addPrefix: true })} do mês
+            anterior
+          </p>
+        )}
       </CardContent>
     </Card>
   );

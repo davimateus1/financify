@@ -37,7 +37,6 @@ export const useConfirm = ({ title, message }: ConfirmProps): ConfirmReturn => {
     handleClose();
   };
 
-  // TODO: Resolve close button dialog
   const ConfirmationDialog = () => (
     <Dialog open={!!promise} onOpenChange={handleClose}>
       <DialogContent>
