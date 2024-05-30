@@ -14,7 +14,7 @@ import {
 import { ptBR } from "date-fns/locale";
 import { DateRange } from "react-day-picker";
 
-import { format, subDays } from "date-fns";
+import { addDays, format, subDays } from "date-fns";
 import { formatDateRange } from "@/lib/utils";
 import { useGetSummary } from "@/features/summary/api/use-get-summary";
 
@@ -37,8 +37,8 @@ export const DateFilter = () => {
   const defaultFrom = subDays(defaultTo, 30);
 
   const paramState = {
-    from: from ? new Date(from) : defaultFrom,
-    to: to ? new Date(to) : defaultTo,
+    from: from ? addDays(new Date(from), 1) : defaultFrom,
+    to: to ? addDays(new Date(to), 1) : defaultTo,
   };
 
   const [date, setDate] = useState<DateRange | undefined>(paramState);

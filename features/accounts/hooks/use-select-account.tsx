@@ -12,6 +12,7 @@ import {
   DialogFooter,
   DialogContent,
   DialogDescription,
+  DialogClose,
 } from "@/components/ui/dialog";
 
 type ConfirmReturn = [() => JSX.Element, () => Promise<unknown>];
@@ -53,7 +54,6 @@ export const useSelectAccount = (): ConfirmReturn => {
     handleClose();
   };
 
-  // TODO: Resolve close button dialog
   const ConfirmationDialog = () => (
     <Dialog open={!!promise} onOpenChange={handleClose}>
       <DialogContent>
